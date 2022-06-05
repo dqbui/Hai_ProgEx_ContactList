@@ -60,7 +60,29 @@ def list_contacts(contacts):
 
 
 def main(contacts_path):
-    pass
+    print('Welcome to your contact list!\n')
+
+    print('The following is a list of useable commands:')
+    print('\"add\" \t\tAdds a contact')
+    print('\"delete\" \tDeletes a contacnt')
+    print('\"list\" \t\tLists all contacts.')
+    print('\"search\" \tSearches for a contact by name.')
+    print('\"q\" \t\tQuits the program and saves the contact list.')
+
+    while True:
+        user_command = input('Please enter a command: ').lower()
+        if user_command == 'add':
+            print(user_command)
+        elif user_command in ['delete', 'del']:
+            print(user_command)
+        elif user_command in ['list', 'lst', 'ls']:
+            print(user_command)
+        elif user_command in ['search', 's']:
+            print(user_command)
+        elif user_command == 'q':
+            break
+        else:
+            print('Unknown command...')
 
 
 if __name__ == "__main__":
