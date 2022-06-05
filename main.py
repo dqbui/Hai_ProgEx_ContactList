@@ -1,4 +1,5 @@
 import json
+from contact import contact
 
 
 CONTACT_FILE_PATH = "contacts.json"
@@ -15,7 +16,7 @@ def read_contacts(file_path):
 
 
 def write_contacts(file_path, contacts):
-    with open(file_path, 'w') as f:
+    with open(file_path, 'a') as f:
         contacts = {"contacts": contacts}
         json.dump(contacts, f)
 
@@ -44,7 +45,7 @@ def verify_email_address(email):
 
 
 def add_contact(contacts):
-    pass
+    write_contacts(CONTACT_FILE_PATH, contacts.dict_form)
 
 
 def search_for_contact(contacts):
@@ -57,6 +58,24 @@ def delete_contact(contacts):
 
 def list_contacts(contacts):
     pass
+
+
+def take_phone_number(phone_type):
+    if phone_type == 'cell':
+        phone_number = input('Enter cellphone number: ')
+    elif phone_type == 'work':
+        phone_number = input('Enter work phone number: ')
+    else:
+        print('invalid phone choice')
+        return 0
+
+    # clean up phone number, get rid of special characters
+    phone_clean = ''
+    for char in phone_number:
+        if char in '0123456789':
+            phone_clean += char
+
+    return phone_clean
 
 
 def main(contacts_path):
@@ -72,7 +91,40 @@ def main(contacts_path):
     while True:
         user_command = input('Please enter a command: ').lower()
         if user_command == 'add':
-            print(user_command)
+
+            # uncomment this section to get user input
+            first_name = input('Enter first name: ')
+            while len(first_name) < 1:
+                print('First name is mandatory!')
+                first_name = input('Enter first name again: ')
+
+            last_name = input('Enter last name: ')
+            while len(last_name) < 1:
+                print('Last name is mandatory')
+                last_name = input('Enter last name again: ')
+
+            cellphone = take_phone_number('cell')
+            workphone = take_phone_number('work')
+            email = input('Enter email: ')
+
+            while not verify_email_address(email):
+                print('Invalid email adress.')
+                email = input('Enter email again: ')
+
+            # boogey input
+            # first_name = 'James'
+            # last_name = 'Bond'
+            # cellphone = '0944916475'
+            # workphone = '0973033324'
+            # email = 'batman@dc.com'
+
+            # checkpoint: print out input so far
+            new_contact = contact(first_name, last_name,
+                                  cellphone, workphone, email)
+            print(new_contact)
+
+            add_contact(new_contact)
+
         elif user_command in ['delete', 'del']:
             print(user_command)
         elif user_command in ['list', 'lst', 'ls']:
