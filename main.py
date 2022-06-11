@@ -2,7 +2,7 @@ import json
 
 from more_itertools import first
 from contact import contact
-
+from time import sleep
 
 CONTACT_FILE_PATH = "contacts.json"
 
@@ -17,10 +17,10 @@ def read_contacts(file_path):
     return contacts
 
 
-def write_contacts(file_path, contacts):
-    with open(file_path, 'a') as f:
-        contacts = {"contacts": contacts}
-        json.dump(contacts, f)
+# def write_contacts(file_path, contacts):
+#     with open(file_path, 'w') as f:
+#         contacts = {"contacts": contacts}
+#         json.dump(contacts, f)
 
 
 def verify_email_address(email):
@@ -47,7 +47,16 @@ def verify_email_address(email):
 
 
 def add_contact(contacts):
-    write_contacts(CONTACT_FILE_PATH, contacts.dict_form)
+    contact_holder = read_contacts(CONTACT_FILE_PATH)
+    print('Existing contacts:')
+    print(contact_holder)
+    print('Writing new contact')
+    sleep(2)
+
+    contact_holder[contacts.key] = contacts.dict_form
+    with open(CONTACT_FILE_PATH, 'w') as f:
+        json.dump(contact_holder, f)
+    print('done')
 
 
 def search_for_contact(contacts):

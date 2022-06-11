@@ -2,6 +2,7 @@ class contact:
     def __init__(self, first, last, cell, work, email):
         self.first_name = first.capitalize()
         self.last_name = last.capitalize()
+        self.key = self.first_name + ' ' + self.last_name
         self.cellphone = cell
         self.workphone = work
         self.email = email

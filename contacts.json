@@ -26,5 +26,26 @@
         "Cellphone": "666",
         "Workphone": "999",
         "Email": "whowhatwhenwherewhy@hellskitchen.com"
+    },
+    "Peter Parker": {
+        "First name": "Peter",
+        "Last name": "Parker",
+        "Cellphone": "1236342512",
+        "Workphone": "1236",
+        "Email": "Not_a_bug@dailybugle.com"
+    },
+    "Thor Odinson": {
+        "First name": "Thor",
+        "Last name": "Odinson",
+        "Cellphone": "12389",
+        "Workphone": "234967",
+        "Email": "I_am_worthy@asgard.org"
+    },
+    "Clark Kent": {
+        "First name": "Clark",
+        "Last name": "Kent",
+        "Cellphone": "1234",
+        "Workphone": "1234",
+        "Email": "asdf@asdf.co.uk"
     }
 }
