@@ -1,2 +1,25 @@
-{"contacts": {"First name": "Tony", "Last name": "Stark", "Cellphone": "69", "Workphone": "", "Email": "stanleefav@marvel.com"}}
-{"contacts": {"First name": "Bruce", "Last name": "Wayne", "Cellphone": "420", "Workphone": "7749", "Email": "stanleefav@marvel.com"}}
+{
+    "contacts": [
+        {
+            "First name": "Tony",
+            "Last name": "Stark",
+            "Cellphone": "69",
+            "Workphone": "",
+            "Email": "stanleefav@marvel.com"
+        },
+        {
+            "First name": "Bruce",
+            "Last name": "Wayne",
+            "Cellphone": "42",
+            "Workphone": "0973033324",
+            "Email": "bestdetective@dc.com"
+        },
+        {
+            "First name": "Dead",
+            "Last name": "Pool",
+            "Cellphone": "999",
+            "Workphone": "",
+            "Email": "FuckDeath@marvel.com"
+        }
+    ]
+}

@@ -83,7 +83,7 @@ def main(contacts_path):
 
     print('The following is a list of useable commands:')
     print('\"add\" \t\tAdds a contact')
-    print('\"delete\" \tDeletes a contacnt')
+    print('\"delete\" \tDeletes a contact')
     print('\"list\" \t\tLists all contacts.')
     print('\"search\" \tSearches for a contact by name.')
     print('\"q\" \t\tQuits the program and saves the contact list.')
