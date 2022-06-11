@@ -1,4 +1,6 @@
 import json
+
+from more_itertools import first
 from contact import contact
 
 
@@ -8,7 +10,7 @@ CONTACT_FILE_PATH = "contacts.json"
 def read_contacts(file_path):
     try:
         with open(file_path, 'r') as f:
-            contacts = json.load(f)['contacts']
+            contacts = json.load(f)
     except FileNotFoundError:
         contacts = []
 
@@ -102,6 +104,14 @@ def main(contacts_path):
             while len(last_name) < 1:
                 print('Last name is mandatory')
                 last_name = input('Enter last name again: ')
+
+            existing_contacts = read_contacts(CONTACT_FILE_PATH).keys()
+            # print(existing_contacts)
+            current_name = first_name.capitalize() + ' ' + last_name.capitalize()
+
+            if current_name in existing_contacts:  # check if new entry is already in contact list
+                print('Invalid! Contact already exist!!!')
+                continue
 
             cellphone = take_phone_number('cell')
             workphone = take_phone_number('work')

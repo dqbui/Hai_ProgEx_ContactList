@@ -1,25 +1,30 @@
 {
-    "contacts": [
-        {
-            "First name": "Tony",
-            "Last name": "Stark",
-            "Cellphone": "69",
-            "Workphone": "",
-            "Email": "stanleefav@marvel.com"
-        },
-        {
-            "First name": "Bruce",
-            "Last name": "Wayne",
-            "Cellphone": "42",
-            "Workphone": "0973033324",
-            "Email": "bestdetective@dc.com"
-        },
-        {
-            "First name": "Dead",
-            "Last name": "Pool",
-            "Cellphone": "999",
-            "Workphone": "",
-            "Email": "FuckDeath@marvel.com"
-        }
-    ]
+    "Tony Stark": {
+        "First name": "Tony",
+        "Last name": "Stark",
+        "Cellphone": "69",
+        "Workphone": "",
+        "Email": "stanleefav@marvel.com"
+    },
+    "Bruce Wayne": {
+        "First name": "Bruce",
+        "Last name": "Wayne",
+        "Cellphone": "42",
+        "Workphone": "0973033324",
+        "Email": "bestdetective@dc.com"
+    },
+    "Dead Pool": {
+        "First name": "Dead",
+        "Last name": "Pool",
+        "Cellphone": "999",
+        "Workphone": "",
+        "Email": "FuckDeath@marvel.com"
+    },
+    "Vic Savage": {
+        "First name": "Vic",
+        "Last name": "Savage",
+        "Cellphone": "666",
+        "Workphone": "999",
+        "Email": "whowhatwhenwherewhy@hellskitchen.com"
+    }
 }
