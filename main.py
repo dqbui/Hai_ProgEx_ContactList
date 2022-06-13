@@ -1,6 +1,6 @@
 import json
 
-from more_itertools import first
+# from more_itertools import first
 from contact import contact
 from time import sleep
 
@@ -48,15 +48,15 @@ def verify_email_address(email):
 
 def add_contact(contacts):
     contact_holder = read_contacts(CONTACT_FILE_PATH)
-    print('Existing contacts:')
-    print(contact_holder)
-    print('Writing new contact')
-    sleep(2)
+    # print('Existing contacts:')
+    # print(contact_holder)
+    # print('Writing new contact')
+    # sleep(2)
 
     contact_holder[contacts.key] = contacts.dict_form
     with open(CONTACT_FILE_PATH, 'w') as f:
         json.dump(contact_holder, f)
-    print('done')
+    # print('done')
 
 
 def search_for_contact(contacts):
