@@ -1,6 +1,4 @@
 import json
-
-# from more_itertools import first
 from contact import contact
 from time import sleep
 
@@ -21,6 +19,28 @@ def read_contacts(file_path):
 #     with open(file_path, 'w') as f:
 #         contacts = {"contacts": contacts}
 #         json.dump(contacts, f)
+
+def print_contact_from_name(full_name):
+    all_contact = read_contacts(CONTACT_FILE_PATH)
+
+    target_contact = all_contact[full_name]
+
+    first_name = target_contact['First name']
+    last_name = target_contact['Last name']
+    cell_phone = target_contact['Cellphone']
+    work_phone = target_contact['Workphone']
+    email = target_contact['Email']
+
+    print(f'First name: {first_name}')
+    print(f'Last name: {last_name}')
+    if len(cell_phone) > 0:
+        print(f'Cellphone: {cell_phone}')
+    if len(work_phone) > 0:
+        print(f'Workphone: {work_phone}')
+    if len(email) > 0:
+        print(f'Email: {email}')
+
+    return
 
 
 def verify_email_address(email):
@@ -48,6 +68,8 @@ def verify_email_address(email):
 
 def add_contact(contacts):
     contact_holder = read_contacts(CONTACT_FILE_PATH)
+    # print('Adding contact:')
+    # print(contacts)
     # print('Existing contacts:')
     # print(contact_holder)
     # print('Writing new contact')
@@ -56,18 +78,6 @@ def add_contact(contacts):
     with open(CONTACT_FILE_PATH, 'w') as f:
         json.dump(contact_holder, f)
     # print('done')
-
-
-def search_for_contact(contacts):
-    pass
-
-
-def delete_contact(contacts):
-    pass
-
-
-def list_contacts(contacts):
-    pass
 
 
 def take_phone_number(phone_type):
@@ -118,18 +128,81 @@ def get_new_contact():
     # checkpoint: print out input so far
     new_contact = contact(first_name, last_name,
                           cellphone, workphone, email)
+    print('\n Adding contact:')
     print(new_contact)
     return new_contact
+
+
+def search_for_contact(contacts):
+    for name in contacts:
+        print_contact_from_name(name)
+        print()
+
+
+def delete_contact(contacts):
+    contact_holder = read_contacts(CONTACT_FILE_PATH)
+    print(f'Deleting {contacts}')
+
+    del contact_holder[contacts]
+    with open(CONTACT_FILE_PATH, 'w') as f:
+        json.dump(contact_holder, f)
+
+
+def get_contact_from_file():
+    first_name = input('Enter first name of target contact: ')
+    last_name = input('Enter last name of target contact: ')
+    first_name = first_name.capitalize()
+    last_name = last_name.capitalize()
+    full_name = first_name + ' ' + last_name
+
+    existing_contacts = read_contacts(CONTACT_FILE_PATH).keys()
+
+    if full_name in existing_contacts:
+        return full_name
+    else:
+        print('Invalid! Contact not in directory! Returning to main menu...')
+        return None
+
+
+def list_contacts():
+    all_contact = list(read_contacts(CONTACT_FILE_PATH).keys())
+    all_contact.sort()
+
+    for name in all_contact:
+        print_contact_from_name(name)
+        print()
+
+
+def get_query():  # returns full name string based on user queries, sorted alphabetically
+    first_name_query = input('First name search key: ')
+    last_name_query = input('Last name search key: ')
+
+    print()
+    print('Matching contacts')
+
+    existing_contacts = read_contacts(CONTACT_FILE_PATH).keys()
+
+    search_result = []
+
+    for full_name in existing_contacts:
+        first_name, last_name = full_name.split()
+        # print(first_name, last_name)
+        if first_name_query.lower() in first_name.lower() and last_name_query.lower() in last_name.lower():
+            # print(full_name)
+            search_result.append(full_name)
+
+    search_result.sort()
+    return search_result
 
 
 def main(contacts_path):
     print('Welcome to your contact list!\n')
 
     print('The following is a list of useable commands:')
-    print('\"add\" \t\tAdds a contact')
-    print('\"delete\" \tDeletes a contact')
-    print('\"list\" \t\tLists all contacts.')
-    print('\"search\" \tSearches for a contact by name.')
+    print('\"Add\" \t\tAdds a contact')
+    print('\"Delete\" \tDeletes a contact')
+    print('\"List\" \t\tLists all contacts.')
+    print('\"Search\" \tSearches for a contact by name.')
     print('\"q\" \t\tQuits the program and saves the contact list.')
 
     while True:
@@ -142,11 +215,20 @@ def main(contacts_path):
                 add_contact(new_contact)
 
         elif user_command in ['delete', 'del']:
-            print(user_command)
+            target_contact = get_contact_from_file()
+            if target_contact == None:
+                continue
+            else:
+                delete_contact(target_contact)
+
         elif user_command in ['list', 'lst', 'ls']:
-            print(user_command)
+            print()
+            list_contacts()
+
         elif user_command in ['search', 's']:
-            print(user_command)
+            contact_query = get_query()
+            search_for_contact(contact_query)
+
         elif user_command == 'q':
             break
         else:

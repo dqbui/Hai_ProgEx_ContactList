@@ -10,9 +10,9 @@ class contact:
 
     def __str__(self):
         first_line = f'Full name: {self.first_name} {self.last_name}\n'
-        second_line = f'Cellphone: \t{self.cellphone}\n'
-        third_line = f'Workphone: \t{self.workphone}\n'
-        fourth_line = f'Email: \t{self.email}\n'
+        second_line = f'Cellphone: {self.cellphone}\n'
+        third_line = f'Workphone: {self.workphone}\n'
+        fourth_line = f'Email: {self.email}\n'
 
         output_string = first_line+second_line+third_line+fourth_line
 
