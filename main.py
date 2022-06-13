@@ -88,6 +88,40 @@ def take_phone_number(phone_type):
     return phone_clean
 
 
+def get_new_contact():
+    # uncomment this section to get user input
+    first_name = input('Enter first name: ')
+    while len(first_name) < 1:
+        print('First name is mandatory!')
+        first_name = input('Enter first name again: ')
+
+    last_name = input('Enter last name: ')
+    while len(last_name) < 1:
+        print('Last name is mandatory')
+        last_name = input('Enter last name again: ')
+
+    existing_contacts = read_contacts(CONTACT_FILE_PATH).keys()
+    current_name = first_name.capitalize() + ' ' + last_name.capitalize()
+
+    if current_name in existing_contacts:  # check if new entry is already in contact list
+        print('Invalid! Contact already exist!!!')
+        return None
+
+    cellphone = take_phone_number('cell')
+    workphone = take_phone_number('work')
+    email = input('Enter email: ')
+
+    while not verify_email_address(email):
+        print('Invalid email adress.')
+        email = input('Enter email again: ')
+
+    # checkpoint: print out input so far
+    new_contact = contact(first_name, last_name,
+                          cellphone, workphone, email)
+    print(new_contact)
+    return new_contact
+
+
 def main(contacts_path):
     print('Welcome to your contact list!\n')
 
@@ -101,47 +135,11 @@ def main(contacts_path):
     while True:
         user_command = input('Please enter a command: ').lower()
         if user_command == 'add':
-
-            # uncomment this section to get user input
-            first_name = input('Enter first name: ')
-            while len(first_name) < 1:
-                print('First name is mandatory!')
-                first_name = input('Enter first name again: ')
-
-            last_name = input('Enter last name: ')
-            while len(last_name) < 1:
-                print('Last name is mandatory')
-                last_name = input('Enter last name again: ')
-
-            existing_contacts = read_contacts(CONTACT_FILE_PATH).keys()
-            # print(existing_contacts)
-            current_name = first_name.capitalize() + ' ' + last_name.capitalize()
-
-            if current_name in existing_contacts:  # check if new entry is already in contact list
-                print('Invalid! Contact already exist!!!')
+            new_contact = get_new_contact()
+            if new_contact == None:
                 continue
-
-            cellphone = take_phone_number('cell')
-            workphone = take_phone_number('work')
-            email = input('Enter email: ')
-
-            while not verify_email_address(email):
-                print('Invalid email adress.')
-                email = input('Enter email again: ')
-
-            # boogey input
-            # first_name = 'James'
-            # last_name = 'Bond'
-            # cellphone = '0944916475'
-            # workphone = '0973033324'
-            # email = 'batman@dc.com'
-
-            # checkpoint: print out input so far
-            new_contact = contact(first_name, last_name,
-                                  cellphone, workphone, email)
-            print(new_contact)
-
-            add_contact(new_contact)
+            else:
+                add_contact(new_contact)
 
         elif user_command in ['delete', 'del']:
             print(user_command)
